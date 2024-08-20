@@ -8,8 +8,8 @@ const HomePage = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-centerp-24">
-      <h1> Testing Web</h1>
-      <h2>Listado de Criterios de Accesibilidad</h2>
+      <h1 className="text-4xl font-bold mb-6"> Testing Web</h1>
+      <h2 className="text-2xl font-bold mb-6">Listado de Criterios de Accesibilidad</h2>
     <ul>
     <li><a href="#" aria-label="Criterio 1.1.1 Contenido no textual">1.1.1 Contenido no textual</a></li>
         <li><a href="#" aria-label="Criterio 1.2.1 Solo audio y solo video (grabado)">1.2.1 Solo audio y solo video (grabado)</a></li>
