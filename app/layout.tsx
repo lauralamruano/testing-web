@@ -1,11 +1,19 @@
-import React, { Suspense } from "react";
+import type { Metadata } from "next";
+import "./globals.css";
 
-const HomeLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <html>
-      <body>{children}</body>
-    </html>
-  );
+export const metadata: Metadata = {
+  title: "Testing Ally Web",
+  description: "Detector",
 };
 
-export default HomeLayout;
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className="bg-green-200 text-black">{children}</body>
+    </html>
+  );
+}
