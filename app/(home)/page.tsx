@@ -1,11 +1,15 @@
+import Link from "next/link";
 import React from "react";
 
 
+
 const HomePage = () => {
+
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-centerp-24">
-      <h1> Testing Web</h1>
-      <h2>Listado de Criterios de Accesibilidad</h2>
+      <h1 className="text-4xl font-bold mb-6"> Testing Web</h1>
+      <h2 className="text-2xl font-bold mb-6">Listado de Criterios de Accesibilidad</h2>
     <ul>
     <li><a href="#" aria-label="Criterio 1.1.1 Contenido no textual">1.1.1 Contenido no textual</a></li>
         <li><a href="#" aria-label="Criterio 1.2.1 Solo audio y solo video (grabado)">1.2.1 Solo audio y solo video (grabado)</a></li>
@@ -26,7 +30,7 @@ const HomePage = () => {
         <li><a href="#" aria-label="Criterio 1.4.12 Espaciado de texto">1.4.12 Espaciado de texto</a></li>
         <li><a href="#" aria-label="Criterio 1.4.13 Contenido al pasar el puntero o al recibir el foco">1.4.13 Contenido al pasar el puntero o al recibir el foco</a></li>
         <li><a href="#" aria-label="Criterio 2.1.1 Teclado">2.1.1 Teclado</a></li>
-        <li><a href="#" aria-label="Criterio 2.1.2 Sin trampas para el foco del teclado">2.1.2 Sin trampas para el foco del teclado</a></li>
+        <li className="text-white text-decoration underline cursor-pointer"> <Link href="/focus-trap">2.1.2 Sin trampas para el foco del teclado </Link></li>
         <li><a href="#" aria-label="Criterio 2.1.4 Atajos de teclado">2.1.4 Atajos de teclado</a></li>
         <li><a href="#" aria-label="Criterio 2.2.1 Tiempo ajustable">2.2.1 Tiempo ajustable</a></li>
         <li><a href="#" aria-label="Criterio 2.2.2 Pausar, detener, ocultar">2.2.2 Pausar, detener, ocultar</a></li>
