@@ -1,10 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-
-
 const HomePage = () => {
-
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-centerp-24">
