@@ -6,7 +6,7 @@ import React from "react";
 const FocusPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start">
-      <h1 className="text-4xl font-bold mb-6">Patterns</h1>
+      <h1 className="text-4xl font-bold mb-6 p-6">Patterns</h1>
       <section>
         <p></p>
       <div className="flex items-start justify-center gap-8">
