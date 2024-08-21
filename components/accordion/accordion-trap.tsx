@@ -42,7 +42,7 @@ const AccordionTrap: React.FC<AccordionProps> = ({ title, content }) => {
   }, [isOpen]);
 
   return (
-    <div className="w-full max-w-md mx-auto mt-5">
+    <div className="w-full max-w-md mx-auto mt-5" id="accordion-trap">
       <button
         className="flex items-center justify-between w-full p-4 text-left bg-green-200 rounded-t-lg focus:outline-none"
         aria-expanded={isOpen}
@@ -64,8 +64,8 @@ const AccordionTrap: React.FC<AccordionProps> = ({ title, content }) => {
           onKeyDown={handleKeyDown}
         >
           <p>{content}</p>
-          <button className="mt-2 p-2 mr-5 bg-green-500 text-white rounded">Focusable Button 1</button>
-          <button className="mt-2 p-2 bg-green-500 text-white rounded">Focusable Button 2</button>
+          <button className="mt-2 p-2 mr-5 bg-green-500 text-white rounded" id="Button1">Focusable Button 1</button>
+          <button className="mt-2 p-2 bg-green-500 text-white rounded" id="Button2">Focusable Button 2</button>
         </div>
       )}
     </div>
