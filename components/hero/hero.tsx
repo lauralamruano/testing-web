@@ -13,7 +13,7 @@ const Hero = () => {
             className="max-w-lg rounded-lg shadow-2xl" alt={""}/>
           <div>
             <h1 className="text-5xl font-bold">Testing Web</h1>
-            <p className="py-6">
+            <p className="py-6 max-w-lg">
             Website designed to evaluate and ensure web accessibility compliance.
             </p>
             <button className="btn">Get Started</button>

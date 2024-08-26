@@ -9,9 +9,9 @@ const NavBar: React.FC = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li><Link href="/pattern">Patterns</Link></li>
-          <li><Link href="/check-points">Check List</Link></li>
-          <li><Link href="/check-points">Mobile</Link></li>
+          <li className="shadow-xl"><Link href="/pattern">Patterns</Link></li>
+          <li className="shadow-xl"><Link href="/check-points">Check List</Link></li>
+          <li className="shadow-xl"><Link href="/">Mobile</Link></li>
         </ul>
       </div>
       <div className="navbar-end">
