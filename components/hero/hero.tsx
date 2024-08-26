@@ -2,6 +2,8 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import accessibility from "../../assets/images/Accessibility.jpg";
+import a11y from "../../assets/images/a11y.jpeg";
+
 
 const Hero = () => {
   return (
@@ -9,7 +11,7 @@ const Hero = () => {
       <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <Image
-            src={accessibility}
+            src={a11y}
             className="max-w-lg rounded-lg shadow-2xl" alt={""}/>
           <div>
             <h1 className="text-5xl font-bold">Testing Web</h1>
