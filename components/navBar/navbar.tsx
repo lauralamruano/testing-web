@@ -5,7 +5,7 @@ const NavBar: React.FC = () => {
   return (
     <div className="navbar bg-green-100">
       <div className="navbar-start">
-        <a className="btn btn-ghost text-xl" href="https://lauralamruano.github.io/">LL</a>
+        <a className="btn btn-ghost text-xl" href="">LL</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
