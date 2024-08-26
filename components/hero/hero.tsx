@@ -10,13 +10,13 @@ const Hero = () => {
         <div className="hero-content flex-col lg:flex-row-reverse">
           <Image
             src={accessibility}
-            className="max-w-sm rounded-lg shadow-2xl" alt={""}/>
+            className="max-w-lg rounded-lg shadow-2xl" alt={""}/>
           <div>
             <h1 className="text-5xl font-bold">Testing Web</h1>
             <p className="py-6">
             Website designed to evaluate and ensure web accessibility compliance.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <button className="btn">Get Started</button>
           </div>
         </div>
       </div>

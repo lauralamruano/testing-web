@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/footer";
 import Hero from "@/components/hero/hero";
 import NavBar from "@/components/navBar/navbar";
 import React from "react";
@@ -11,7 +12,10 @@ const HomePage = () => {
       </header>
       <main>
         <Hero/>
-      </main>
+      </main> 
+      <footer>
+        <Footer/>
+      </footer>
     </div>
   );
 };

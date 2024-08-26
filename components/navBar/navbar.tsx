@@ -11,6 +11,7 @@ const NavBar: React.FC = () => {
         <ul className="menu menu-horizontal px-1">
           <li><Link href="/pattern">Patterns</Link></li>
           <li><Link href="/check-points">Check List</Link></li>
+          <li><Link href="/check-points">Mobile</Link></li>
         </ul>
       </div>
       <div className="navbar-end">
