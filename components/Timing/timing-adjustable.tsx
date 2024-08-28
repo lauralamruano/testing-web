@@ -85,7 +85,7 @@ const TimeLimitForm: React.FC = () => {
 
         {!disableTimeLimit && (
           <div className="mb-4 text-sm text-red-600">
-            Time remaining: {timeRemaining} segundos
+            Time remaining: {timeRemaining} seconds
           </div>
         )}
         <button

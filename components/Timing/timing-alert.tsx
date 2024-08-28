@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, ChangeEvent, FormEvent } from "react"
 
 const TimeAlertForm: React.FC = () => {
   const [disableTimeLimit, setDisableTimeLimit] = useState<boolean>(false);
-  const [timeRemaining, setTimeRemaining] = useState<number>(20); // 2 minutos por defecto
+  const [timeRemaining, setTimeRemaining] = useState<number>(30); // 2 minutos por defecto
   const [formData, setFormData] = useState<{ name: string; email: string }>({
     name: "",
     email: "",
@@ -29,7 +29,7 @@ const TimeAlertForm: React.FC = () => {
   }, [disableTimeLimit, timeRemaining]);
 
   useEffect(() => {
-    if (timeRemaining <= 10 && !disableTimeLimit) {
+    if (timeRemaining <= 22 && !disableTimeLimit) {
       setShowWarning(true);
     } else {
       setShowWarning(false);
@@ -118,7 +118,7 @@ const TimeAlertForm: React.FC = () => {
 
           {!disableTimeLimit && (
             <div className="mb-4 text-sm text-red-600">
-              Time remaining: {timeRemaining} segundos
+              Time remaining: {timeRemaining} seconds
             </div>
           )}
           <button
