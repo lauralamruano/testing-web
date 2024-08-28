@@ -3,7 +3,10 @@ import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 const TimeLimitForm: React.FC = () => {
   const [disableTimeLimit, setDisableTimeLimit] = useState<boolean>(false);
   const [timeRemaining, setTimeRemaining] = useState<number>(120); // 2 minutos por defecto
-  const [formData, setFormData] = useState<{ name: string; email: string }>({ name: "", email: "" });
+  const [formData, setFormData] = useState<{ name: string; email: string }>({
+    name: "",
+    email: "",
+  });
 
   useEffect(() => {
     if (!disableTimeLimit && timeRemaining > 0) {
@@ -33,7 +36,10 @@ const TimeLimitForm: React.FC = () => {
       <h2 className="text-2xl font-bold mb-4">Time-limited form</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700"
+          >
             Name
           </label>
           <input
@@ -47,7 +53,10 @@ const TimeLimitForm: React.FC = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
             Email
           </label>
           <input
@@ -60,18 +69,20 @@ const TimeLimitForm: React.FC = () => {
             required
           />
         </div>
-        <div className="mb-4">
-          <label className="inline-flex items-center">
+        <div className="form-control">
+          <label className="cursor-pointer label">
             <input
               type="checkbox"
               checked={disableTimeLimit}
               onChange={handleCheckboxChange}
-              className="h-5 w-5 bg-white border-black focus:ring-indigo-500"
+              defaultChecked
               aria-label="Disable time limit"
+              className="checkbox checkbox-success"
             />
-            <span className="ml-2 text-sm text-gray-700">Disable time limit</span>
+            <span className="label-text text-gray-700">Disable time limit</span>
           </label>
         </div>
+
         {!disableTimeLimit && (
           <div className="mb-4 text-sm text-red-600">
             Time remaining: {timeRemaining} segundos
@@ -79,7 +90,7 @@ const TimeLimitForm: React.FC = () => {
         )}
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Send
         </button>
