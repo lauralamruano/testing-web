@@ -12,7 +12,7 @@ const CheckListTable = () => {
           id="accessibility-table-description"
           className="text-lg font-bold mb-4"
         >
-          Accessibility Checkpoints 
+          Accessibility Checkpoints
         </caption>
         <thead>
           <tr>
@@ -57,7 +57,10 @@ const CheckListTable = () => {
                     2.1.2 Sin trampas para el foco del teclado{" "}
                   </Link>
                 </li>
-                <li>2.2.1 Timing Adjustable</li>
+                <li className="text-white text-decoration underline cursor-pointer">
+                {" "}
+                  <Link href="/timing-adjustable">2.2.1 Timing Adjustable{" "}</Link>
+                </li>
                 <li>2.4.1 Bypass Blocks</li>
               </ul>
             </td>
