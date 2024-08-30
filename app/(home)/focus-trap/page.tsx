@@ -1,5 +1,6 @@
 "use client";
 import AccordionTrap from "@/components/accordion/accordion-trap";
+import AccordionTrapTab from "@/components/accordion/accordion-trap-only-tab";
 import ComboboxTrap from "@/components/combobox/combobox-trap";
 import React from "react";
 
@@ -13,7 +14,8 @@ const FocusPage: React.FC = () => {
         <ComboboxTrap/>
         <div>
           <h2 className="text-2xl font-semibold mb-4">Accordion</h2>
-          <AccordionTrap title={"Accordion Trap (Tab)"} content={""} />
+          {/* <AccordionTrap title={"Accordion Trap (Only Tab)"} content={""} /> */}
+          <AccordionTrapTab title={"Accordion Trap (Only Tab)"} content={""} />
         </div>
       </div>
       </section>
