@@ -50,7 +50,10 @@ const CheckListTable = () => {
             </th>
             <td className="border border-gray-300 px-4 py-2">
               <ul className="list-disc pl-5">
-                <li>2.1.1 Keyboard</li>
+              <li className="text-white text-decoration underline cursor-pointer">
+                {" "}
+                  <Link href="/interactive-elements">2.1.1 Keyboard{" "}</Link>
+                </li>
                 <li className="text-white text-decoration underline cursor-pointer">
                   {" "}
                   <Link href="/focus-trap">
