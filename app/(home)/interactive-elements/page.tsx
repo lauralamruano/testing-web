@@ -28,7 +28,6 @@ const InteractiveElements: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="font-bold text-2xl mt-0">2.1.1 Keyboard</h1>
       <div className="flex flex-wrap gap-12">
       <div className="flex flex-col space-y-2">
         <h2 className="font-bold">Elementos interactivos</h2>
@@ -79,6 +78,32 @@ const InteractiveElements: React.FC = () => {
           aria-label="Input 2"
         />
       </div>
+      <section className="mt-8 w-full">
+        <h2 className="font-bold text-xl">Non-Interactive Elements</h2>
+        <div className="flex flex-col space-y-2 mt-4">
+          <div
+            className="p-4 border rounded bg-gray-100"
+            tabIndex={0}
+            aria-label="Non-interactive element 1"
+          >
+            Non-interactive element 1
+          </div>
+          <div
+            className="p-4 border rounded bg-gray-100"
+            tabIndex={0}
+            aria-label="Non-interactive element 2"
+          >
+            Non-interactive element 2
+          </div>
+          <div
+            className="p-4 border rounded bg-gray-100"
+            tabIndex={0}
+            aria-label="Non-interactive element 3"
+          >
+            Non-interactive element 3
+          </div>
+        </div>
+      </section>
       </div>
     </div>
   );
