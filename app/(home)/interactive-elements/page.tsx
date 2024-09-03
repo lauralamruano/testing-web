@@ -1,4 +1,5 @@
 "use client";
+import RadioGroup from "@/components/radio-group/radio-group";
 import React, { useEffect, useRef } from "react";
 
 const InteractiveElements: React.FC = () => {
@@ -27,10 +28,10 @@ const InteractiveElements: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center p-6">
       <div className="flex flex-wrap gap-12">
       <div className="flex flex-col space-y-2">
-        <h2 className="font-bold">Elementos interactivos</h2>
+        <h2 className="font-bold">Interactive Elements</h2>
         <a href="#link1" className="text-green-700 underline">
           Link 1
         </a>
@@ -42,7 +43,7 @@ const InteractiveElements: React.FC = () => {
         </a>
       </div>
     <div className="flex flex-col space-y-2">
-      <h2 className="font-bold">Estos elementos no se pueden navegar con Shift Tab</h2>
+      <h2 className="font-bold">These items cannot be navigated with Shift Tab</h2>
       {["Button 1", "Button 2", "Button 3"].map((label, index) => (
         <button
           key={index}
@@ -104,6 +105,10 @@ const InteractiveElements: React.FC = () => {
           </div>
         </div>
       </section>
+      <section>
+        <h2 className="font-bold text-xl">Radio Group con Keydown</h2>
+        <RadioGroup/>
+        </section>
       </div>
     </div>
   );

@@ -57,7 +57,7 @@ const CheckListTable = () => {
                 <li className="text-white text-decoration underline cursor-pointer">
                   {" "}
                   <Link href="/focus-trap">
-                    2.1.2 Sin trampas para el foco del teclado{" "}
+                    2.1.2 No Keyboard Trap{" "}
                   </Link>
                 </li>
                 <li className="text-white text-decoration underline cursor-pointer">
