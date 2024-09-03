@@ -106,7 +106,7 @@ const InteractiveElements: React.FC = () => {
         </div>
       </section>
       <section>
-        <h2 className="font-bold text-xl">Radio Group con Keydown</h2>
+        <h2 className="font-bold text-xl">Radio Group with Keydown</h2>
         <RadioGroup/>
         </section>
       </div>
