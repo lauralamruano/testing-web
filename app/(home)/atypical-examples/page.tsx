@@ -1,9 +1,7 @@
-"use client";
-
+import React from "react";
 import PatternCard from "@/components/card/card-pattern";
-import ExportComponet from "@/components/export-component/export-component";
 
-const ExportPage = () => {
+const AtypicalExamples : React.FC = () => {
   return (
     <main className="flex min-h-screen items-center justify-center flex-col">
       <ul className="flex gap-8">
@@ -28,4 +26,4 @@ const ExportPage = () => {
   );
 };
 
-export default ExportPage;
+export default AtypicalExamples;
