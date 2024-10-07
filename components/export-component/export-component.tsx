@@ -17,14 +17,14 @@ const ExportComponet: React.FC = () => {
     }
   };
   return (
-    <div className="p-6 border border-gray-300 rounded-md">
+    <div className="p-6 border border-gray-300 rounded-md bg-green-200">
       <h2 className="text-xl font-semibold mb-4">Upload an Image</h2>
       <input
         type="file"
         accept="image/*"
         onChange={handleFileChange}
         aria-label="Choose an image file to upload"
-        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+        className="block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-red-500"
         ref={fileInputRef}
       />
       {selectedFile && (
