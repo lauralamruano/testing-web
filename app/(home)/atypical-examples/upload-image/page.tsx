@@ -1,7 +1,10 @@
 import ExportComponet from "@/components/export-component/export-component";
 
-
-
-export const ExportPage = () => {
-  return <><ExportComponet /></>;
+const UploadImagePage: React.FC = () => {
+  return (
+    <>
+      <ExportComponet />
+    </>
+  );
 };
+export default UploadImagePage;

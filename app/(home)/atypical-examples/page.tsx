@@ -1,7 +1,7 @@
 import React from "react";
 import PatternCard from "@/components/card/card-pattern";
 
-const UploadImagePage : React.FC = () => {
+const AtypicalExamples : React.FC = () => {
   return (
     <main className="flex min-h-screen items-center justify-center flex-col">
       <ul className="flex gap-8">
@@ -26,4 +26,4 @@ const UploadImagePage : React.FC = () => {
   );
 };
 
-export default UploadImagePage;
+export default AtypicalExamples;
