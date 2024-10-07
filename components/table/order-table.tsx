@@ -1,16 +1,33 @@
+"use client";
+
 import { useState } from "react";
 import { FaSortUp, FaSortDown, FaSort } from "react-icons/fa";
 
+type DataRow = {
+  name: string;
+  address: string;
+  age: number;
+};
+
+type SortOrder = {
+  column: keyof DataRow | null;
+  order: "ascending" | "descending" | "none";
+};
+
 const OrderTable = () => {
-    const [sortOrder, setSortOrder] = useState({ column: null, order: "none" });
-  const [data, setData] = useState([
+  const [sortOrder, setSortOrder] = useState<SortOrder>({
+    column: null,
+    order: "none",
+  });
+
+  const [data, setData] = useState<DataRow[]>([
     { name: "Juan Pérez", address: "Calle Falsa 123", age: 30 },
     { name: "Ana Gómez", address: "Avenida Siempre Viva 742", age: 25 },
     { name: "Carlos López", address: "Boulevard de los Sueños 456", age: 35 },
     { name: "María Fernández", address: "Calle de la Luna 789", age: 28 },
   ]);
 
-  const handleSort = (column) => {
+  const handleSort = (column: keyof DataRow) => {
     const newOrder =
       sortOrder.column === column && sortOrder.order === "ascending"
         ? "descending"
@@ -27,8 +44,8 @@ const OrderTable = () => {
   };
 
   return (
-    <table className="min-w-full border-collapse bg-white border">
-      <thead className="bg-green-200">
+    <table className="min-w-full border-collapse">
+      <thead>
         <tr>
           <th
             scope="col"
