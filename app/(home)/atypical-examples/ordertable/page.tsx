@@ -1,7 +1,8 @@
-import OrderTable from "@/components/table/order-table";
+import React from "react";
 
 
-export const ExportPage = () => {
+
+const OrderTable : React.FC = () => {
   return <><OrderTable/></>;
 };
-
+export default OrderTable;
