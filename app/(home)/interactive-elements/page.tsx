@@ -1,4 +1,5 @@
 "use client";
+import AccessibleLink from "@/components/Link/native-link-focus-order";
 import RadioGroup from "@/components/radio-group/radio-group";
 import React, { useEffect, useRef } from "react";
 
@@ -25,6 +26,10 @@ const InteractiveElements: React.FC = () => {
 
   const handleClick = (label: string) => {
     alert(`Button ${label} clicked`);
+  };
+
+  const handleLinkClick = () => {
+    alert("Link clicked!");
   };
 
   return (
@@ -109,6 +114,7 @@ const InteractiveElements: React.FC = () => {
         <h2 className="font-bold text-xl">Radio Group with Keydown</h2>
         <RadioGroup/>
         </section>
+        <section><AccessibleLink text="Click me" onClick={handleLinkClick} /></section>
       </div>
     </div>
   );
