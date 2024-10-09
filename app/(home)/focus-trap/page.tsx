@@ -2,9 +2,18 @@
 import AccordionTrap from "@/components/accordion/accordion-trap";
 import AccordionTrapTab from "@/components/accordion/accordion-trap-only-tab";
 import ComboboxTrap from "@/components/combobox/combobox-trap";
-import React from "react";
+import ModalTrap from "@/components/modal/modal-trap";
+import React, { useEffect, useState } from "react";
 
 const FocusPage: React.FC = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    // Open the modal automatically when the page loads
+    setModalOpen(true);
+  }, []);
+
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-start">
       <h1 className="text-4xl font-bold mb-6 p-6">Patterns</h1>
@@ -76,6 +85,8 @@ const FocusPage: React.FC = () => {
         </ul>
       </section>
       </section>
+      <section><ModalTrap isOpen={isModalOpen} /></section>
+        
     </div>
   );
 };
