@@ -44,7 +44,7 @@ const OrderTable = () => {
   };
 
   return (
-    <table className="min-w-full border-collapse">
+    <table className="min-w-full border-collapse bg-white">
       <thead>
         <tr>
           <th

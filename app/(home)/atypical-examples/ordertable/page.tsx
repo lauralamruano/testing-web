@@ -1,10 +1,11 @@
-import ExportComponent from "@/components/export-component/export-component";
+import OrderTable from "@/components/table/order-table";
+
 
 const UploadImagePage: React.FC = () => {
   return (
-    <>
-      <ExportComponent />
-    </>
+    <div className="p-8">
+      <OrderTable />
+    </div>
   );
 };
 

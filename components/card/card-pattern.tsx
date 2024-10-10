@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 interface PatternCardProps {
@@ -15,9 +16,8 @@ const PatternCard: React.FC<PatternCardProps> = ({ title, description, link, ima
         <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="text-gray-700 mb-4">{description}</p>
       </div>
-      <a href={link} className="text-blue-500 hover:underline mt-auto">
-        Learn more
-      </a>
+      <Link className="text-blue-500 hover:underline mt-auto" aria-label={`Learn more about ${title}`} href={link}>
+      Learn More</Link>
     </div>
   );
 };
