@@ -6,7 +6,7 @@ const CheckListTable = () => {
     <div className="table-container flex flex-col items-center overflow-x-auto mt-8">
       <h1 id="accessibility-table-description"
           className="text-lg font-bold mb-4 text-green-dark">Accessibility Checkpoints</h1>
-      <section className="flex items-center bg-green-dark p-8">
+      <section className="flex items-center bg-green-dark-50 p-8">
         <p className="text-lg ml-8 text-green-200 font-bold">
           The section titled "Accessibility Checkpoints" is designed to provide
           users with a clear and concise understanding of accessibility success
@@ -18,7 +18,7 @@ const CheckListTable = () => {
         <img className="w-6/12" src="/images/women-mobile.png" alt="" />
       </section>
       <table
-        className="min-w-full border-collapse border border-gray-200  bg-green-dark"
+        className="min-w-full border-collapse border border-gray-200  bg-green-dark-50"
         aria-describedby="accessibility-table-description"
       >
         <thead>
