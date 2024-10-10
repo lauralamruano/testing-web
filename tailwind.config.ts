@@ -9,15 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'green-dark': '#37523e'},
+        "green-dark": "#37523e",
+      },
       backgroundImage: {
-        'green-gradient': 'linear-gradient(to bottom, #bbf7d0, #3f593f)',
-        
+        "green-gradient": "linear-gradient(to bottom, #bbf7d0, #3f593f)",
       },
     },
   },
-  plugins: [
-    require('daisyui'),
-  ],
+  plugins: [require("daisyui")],
 };
 export default config;
