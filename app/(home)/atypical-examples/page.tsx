@@ -4,7 +4,7 @@ import PatternCard from "@/components/card/card-pattern";
 const AtypicalExamples: React.FC = () => {
   return (
     <main className="flex min-h-screen items-center justify-center flex-col">
-      <h1 className="text-xl font-bold mt-4 text-green-dark">
+      <h1 className="text-4xl font-bold mt-4 text-green-dark">
         Accessible Atypical Examples
       </h1>
       <section className="flex items-center bg-green-dark-50 p-12">
@@ -30,7 +30,7 @@ const AtypicalExamples: React.FC = () => {
               title="Order Table"
               description="This example will show a table with sorting and resizing of columns using Keyboard."
               imageSrc="/images/order-table.png"
-              link="./ordertable"
+              link={"/atypical-examples/ordertable"}
             />
           </li>
           <li>
@@ -38,7 +38,7 @@ const AtypicalExamples: React.FC = () => {
               title="Upload Image"
               description="This example is a  file export component allows users to export files using keyboard navigation."
               imageSrc="/images/update-images.png"
-              link=""
+              link="/upload-image"
             />
           </li>
         </ul>
