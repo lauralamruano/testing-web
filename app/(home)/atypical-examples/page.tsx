@@ -38,7 +38,7 @@ const AtypicalExamples: React.FC = () => {
               title="Upload Image"
               description="This example is a  file export component allows users to export files using keyboard navigation."
               imageSrc="/images/update-images.png"
-              link="/upload-image"
+              link= {"/atypical-examples/upload-image"}
             />
           </li>
         </ul>
