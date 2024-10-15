@@ -41,6 +41,9 @@ const AtypicalExamples: React.FC = () => {
               link= {"/atypical-examples/upload-image"}
             />
           </li>
+          <li>
+            <PatternCard title={""} description={""} link={"/atypical-examples/size-table"} imageSrc={""}/>
+          </li>
         </ul>
       </section>
       <section className="flex flex-col items-center justify-center pb-4 w-full">
