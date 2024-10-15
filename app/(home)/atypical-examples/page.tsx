@@ -42,7 +42,7 @@ const AtypicalExamples: React.FC = () => {
             />
           </li>
           <li>
-            <PatternCard title={""} description={""} link={"/atypical-examples/size-table"} imageSrc={""}/>
+            <PatternCard title={"Size Table"} description={"This example will show a table with sorting and resizing of columns using Keyboard."} link={"/atypical-examples/size-table"} imageSrc={"/images/order-table.png"}/>
           </li>
         </ul>
       </section>
