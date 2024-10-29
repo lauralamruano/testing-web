@@ -1,92 +1,19 @@
 "use client";
-import AccordionTrap from "@/components/accordion/accordion-trap";
-import AccordionTrapTab from "@/components/accordion/accordion-trap-only-tab";
-import ComboboxTrap from "@/components/combobox/combobox-trap";
-import ModalTrap from "@/components/modal/modal-trap";
-import React, { useEffect, useState } from "react";
+import PatternCard from "@/components/card/card-pattern";
 
 const FocusPage: React.FC = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    // Open the modal automatically when the page loads
-    setModalOpen(true);
-  }, []);
-
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-start">
       <h1 className="text-4xl font-bold mb-6 p-6">Patterns</h1>
-      <section>
-        <p></p>
-      <div className="flex items-start justify-center gap-8">
-        <ComboboxTrap/>
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Accordion</h2>
-          {/* <AccordionTrap title={"Accordion Trap (Only Tab)"} content={""} /> */}
-          <AccordionTrapTab title={"Accordion Trap (Only Tab)"} content={""} />
-        </div>
-      </div>
+      <section className="flex gap-6">
+        <PatternCard
+          title={"Example a modal with a Keyboard Trap"}
+          description={"The example illustrates an incorrect implementation of a keyboard trap in a modal dialog."}
+          link={"/focus-trap/modal-trap"}
+          imageSrc={"/images/modal-trap.png"}
+        />
+        <PatternCard title={"Keyboard Traps in Interactive Elements"} description={"Incorrect example with keyboard trap with elements like expanded accordions, collapsed menus, or buttons."} link={"/focus-trap/other-elements-trap"} imageSrc={"/images/other-elements.png"}/>
       </section>
-      <section className="flex p-8 gap-8">
-      <section>
-        <h1 className="text-xl font-bold text-green-100 p-4">Lista de Enlaces</h1>
-        <ul className="gap-4">
-          <li className="mb-2">
-            <a
-              id="link-aria"
-              href="https://www.w3.org/WAI/ARIA"
-              className="text-green-200 underline font-bold cursor-pointer"
-            >
-              Enlace sobre ARIA
-            </a>
-          </li>
-          <li className="mb-2">
-            <a
-              id="link-aria-apg"
-              href="https://www.w3.org/WAI/ARIA/apg"
-              className="text-green-200 underline font-bold cursor-pointer"
-            >
-              Enlace sobre ARIA APG
-            </a>
-          </li>
-          <li className="mb-2">
-            <a
-              id="link-aria-patterns"
-              href="https://www.w3.org/WAI/ARIA/apg/patterns"
-              className="text-green-200 underline font-bold cursor-pointer"
-            >
-              Enlace sobre Patrones ARIA
-            </a>
-          </li>
-        </ul>
-      </section>
-      <section>
-        <h1 className="text-xl font-bold text-green-100 p-4">Lista de Botones</h1>
-        <ul>
-          <li className="mb-2">
-            <button
-              id="button-tabpanel"
-              onClick={() => window.location.href='https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/'}
-              className="text-black bg-green-200 hover:bg-green-300 font-bold py-2 px-4 rounded"
-            >
-              Botón sobre Paneles de Pestañas
-            </button>
-          </li>
-          <li className="mb-2">
-            <button
-              id="button-tabs"
-              onClick={() => window.location.href='https://www.w3.org/WAI/ARIA/apg/patterns/tabs/'}
-              className="text-black bg-green-200 hover:bg-green-300 font-bold py-2 px-4 rounded"
-            >
-              Botón sobre Pestañas
-            </button>
-          </li>
-        </ul>
-      </section>
-      </section>
-      <section><ModalTrap isOpen={isModalOpen} /></section>
-        
     </div>
   );
 };
