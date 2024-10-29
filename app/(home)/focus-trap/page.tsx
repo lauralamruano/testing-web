@@ -8,11 +8,21 @@ const FocusPage: React.FC = () => {
       <section className="flex gap-6">
         <PatternCard
           title={"Example a modal with a Keyboard Trap"}
-          description={"The example illustrates an incorrect implementation of a keyboard trap in a modal dialog."}
+          description={
+            "The example illustrates an incorrect implementation of a keyboard trap in a modal dialog."
+          }
           link={"/focus-trap/modal-trap"}
           imageSrc={"/images/modal-trap.png"}
         />
-        <PatternCard title={"Keyboard Traps in Interactive Elements"} description={"Incorrect example with keyboard trap with elements like expanded accordions, collapsed menus, or buttons."} link={"/focus-trap/other-elements-trap"} imageSrc={"/images/other-elements.png"}/>
+        <PatternCard
+          title={"Keyboard Traps in Interactive Elements"}
+          description={
+            "Incorrect example with keyboard trap with elements like expanded accordions, collapsed menus, or buttons."
+          }
+          link={"/focus-trap/other-elements-trap"}
+          imageSrc={"/images/other-elements.png"}
+        />
+        <PatternCard title={"Modal Trap with controls inside"} description={"Modal dialog that captures keyboard focus within its boundaries"} link={"/focus-trap/modal-trap-with-controls"} imageSrc={"/images/modal-wc.png"}/>
       </section>
     </div>
   );
