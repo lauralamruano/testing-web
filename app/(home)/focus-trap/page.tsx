@@ -22,7 +22,22 @@ const FocusPage: React.FC = () => {
           link={"/focus-trap/other-elements-trap"}
           imageSrc={"/images/other-elements.png"}
         />
-        <PatternCard title={"Modal Trap with controls inside"} description={"Modal dialog that captures keyboard focus within its boundaries"} link={"/focus-trap/modal-trap-with-controls"} imageSrc={"/images/modal-wc.png"}/>
+        <PatternCard
+          title={"Modal Trap with controls inside"}
+          description={
+            "Modal dialog that captures keyboard focus within its boundaries"
+          }
+          link={"/focus-trap/modal-trap-with-controls"}
+          imageSrc={"/images/modal-wc.png"}
+        />
+        <PatternCard
+          title={"Form Trap with Shif Tab"}
+          description={
+            "This example demonstrates how to implement keyboard traps on a page"
+          }
+          link={"/focus-trap/form-trap"}
+          imageSrc={"/images/formtrap.png"}
+        />
       </section>
     </div>
   );
