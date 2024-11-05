@@ -58,7 +58,11 @@ const CheckListTable = () => {
                     2.2.1 Timing Adjustable{" "}
                   </Link>
                 </li>
-                <li>2.4.1 Bypass Blocks</li>
+                <li className="text-white text-decoration underline cursor-pointer">
+                {" "}
+                  <Link href={"/focus-order"}>2.4.3 Focus Order {" "}</Link>
+                  
+                </li>
               </ul>
             </td>
           </tr>
