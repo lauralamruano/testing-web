@@ -20,7 +20,12 @@ const FocusOrderPage: React.FC = () => {
           </p>
         </section>
         <section className="flex items-center justify-center gap-4 bg-green-dark w-full p-4">
-            <PatternCard title={"Hidden CSS elements"} description={""} link={"/focus-order/hidden-css"} imageSrc={""}></PatternCard>
+          <PatternCard
+            title={"Hidden CSS elements"}
+            description={"These examples  have controls are hidden with CSS"}
+            link={"/focus-order/hidden-css"}
+            imageSrc={"/images/hidden-css.png"}
+          ></PatternCard>
         </section>
       </main>
     </div>
