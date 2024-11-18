@@ -34,7 +34,7 @@ const OtherInteractiveElements: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center p-6">
-      <div className="flex flex-wrap gap-12">
+      <main className="flex flex-wrap gap-12">
       <div className="flex flex-col space-y-2">
         <h2 className="font-bold">Interactive Elements</h2>
         <a href="#link1" className="text-green-700 underline">
@@ -115,7 +115,7 @@ const OtherInteractiveElements: React.FC = () => {
         <RadioGroup/>
         </section>
         <section><AccessibleLink text="Click me" onClick={handleLinkClick} /></section>
-      </div>
+      </main>
     </div>
   );
 };
