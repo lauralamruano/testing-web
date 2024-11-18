@@ -110,10 +110,10 @@ const OtherInteractiveElements: React.FC = () => {
           </div>
         </div>
       </section>
-      <section>
+      <div role="region">
         <h2 className="font-bold text-xl">Radio Group with Keydown</h2>
         <RadioGroup/>
-        </section>
+        </div>
         <section><AccessibleLink text="Click me" onClick={handleLinkClick} /></section>
       </main>
     </div>
