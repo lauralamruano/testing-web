@@ -22,16 +22,26 @@ const InteractiveElements: React.FC = () => {
       <section className="flex gap-6 justify-center items-center bg-green-dark p-6 w-full">
         <PatternCard
           title={"Modal Support (Escape)"}
-          description={"A dialog that cannot be closed with the Escape key ensures users complete necessary actions before dismissal."}
+          description={
+            "A dialog that cannot be closed with the Escape key ensures users complete necessary actions before dismissal."
+          }
           link={"/interactive-elements/modal-keyboard-support"}
           imageSrc={"/images/escape-modal.png"}
         ></PatternCard>
         <PatternCard
           title={"Interactive Elements"}
-          description={"Interactive elements should be easily navigable and clearly labeled for accessibility."}
+          description={
+            "Interactive elements should be easily navigable and clearly labeled for accessibility."
+          }
           link={"/interactive-elements/other-elements"}
           imageSrc={"/images/other-int-elements.png"}
         ></PatternCard>
+        <PatternCard
+          title={"Interactive Elements Inside Landmarks Regions"}
+          description={"Interactive elements within landmarks powered by ARIA"}
+          link={"/interactive-elements/interactive-elements-inside-landmarks"}
+          imageSrc={"/images/interactive-with-landmark.png"}
+        />
       </section>
     </main>
   );
