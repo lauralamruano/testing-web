@@ -5,13 +5,14 @@ const InteractiveLandmarks: React.FC = () => {
     <div className="w-full min-h-screen flex justify-center flex-col">
       <header role="banner" aria-label="Main Header" className="p-4 bg-green-500 text-white">
         <h1>Accessible Landmark Regions</h1>
-        <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 mt-2 bg-white text-green-900 p-3">
+        {/* Unfocused element: This button will not receive focus */}
+        <button className="mt-2 bg-white text-green-900 p-3" tabIndex={-1}>
           Header Button
         </button>
       </header>
 
       <nav role="navigation" aria-label="Main Navigation" className="p-4 bg-white">
-        <ul className="flex wrap-6 justify-center items-center p-6 g-4">
+        <ul className="flex wrap-6 justify-center items-center p-6 g-4 space-x-4">
           <li>
             <a href="#section1" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 outline outline-black p-2">
               Section 1
@@ -26,6 +27,10 @@ const InteractiveLandmarks: React.FC = () => {
             <a href="#section3" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 outline outline-black p-2">
               Section 3
             </a>
+          </li>
+          {/* Non-interactive element receiving focus */}
+          <li tabIndex={0} className=" p-2 bg-red-100">
+            Non-interactive item
           </li>
         </ul>
       </nav>
@@ -75,11 +80,6 @@ const InteractiveLandmarks: React.FC = () => {
             </button>
           </form>
         </section>
-
-        {/* Non-interactive element receiving focus */}
-        <div tabIndex={0} className="bg-red-200 p-4">
-          Non-interactive element with focus
-        </div>
 
         {/* Hidden control receiving focus */}
         <button className="hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300">
