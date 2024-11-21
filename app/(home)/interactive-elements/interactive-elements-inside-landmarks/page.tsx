@@ -55,6 +55,9 @@ const InteractiveLandmarks: React.FC = () => {
           <a href="#" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 ml-2">
             Learn More
           </a>
+          <div tabIndex={0} className=" p-2 bg-red-100 outline outline-red-800">
+            Non-interactive item
+          </div>
         </section>
 
         <section id="section3" aria-label="Section 3" className="mb-4 bg-green-300 p-12 flex-col flex">
