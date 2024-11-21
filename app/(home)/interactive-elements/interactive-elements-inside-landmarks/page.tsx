@@ -3,15 +3,15 @@ import React from "react";
 const InteractiveLandmarks: React.FC = () => {
   return (
     <div className="w-full min-h-screen flex justify-center flex-col">
-      <header role="banner" aria-label="Main Header" className="p-4 bg-green-500 text-white">
+      <div role="banner" aria-label="Main Header" className="p-4 bg-green-500 text-white">
         <h1>Accessible Landmark Regions</h1>
         {/* Unfocused element: This button will not receive focus */}
         <button className="mt-2 bg-white text-green-900 p-3" tabIndex={-1}>
           Header Button
         </button>
-      </header>
+      </div>
 
-      <nav role="navigation" aria-label="Main Navigation" className="p-4 bg-white">
+      <div role="navigation" aria-label="Main Navigation" className="p-4 bg-white">
         <ul className="flex wrap-6 justify-center items-center p-6 g-4 space-x-4">
           <li>
             <a href="#section1" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 outline outline-black p-2">
@@ -33,9 +33,9 @@ const InteractiveLandmarks: React.FC = () => {
             Non-interactive item
           </li>
         </ul>
-      </nav>
+      </div>
 
-      <main role="main" aria-label="Main Content" className="p-4 flex flex-col justify-center items-center">
+      <div role="main" aria-label="Main Content" className="p-4 flex flex-col justify-center items-center">
         <section id="section1" aria-label="Section 1" className="mb-4 bg-green-100 p-12">
           <h2>Section 1</h2>
           <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300">
@@ -85,14 +85,14 @@ const InteractiveLandmarks: React.FC = () => {
         <button className="hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300">
           Hidden Button
         </button>
-      </main>
+      </div>
 
-      <footer role="contentinfo" aria-label="Footer" className="p-4 bg-green-800 text-white">
+      <div role="contentinfo" aria-label="Footer" className="p-4 bg-green-800 text-white">
         <p>Footer Content</p>
         <a href="#" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300">
           Contact Us
         </a>
-      </footer>
+      </div>
     </div>
   );
 };
