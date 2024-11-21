@@ -11,7 +11,8 @@ const InteractiveLandmarks: React.FC = () => {
         </button>
       </div>
 
-      <div role="navigation" aria-label="Main Navigation" className="p-4 bg-white">
+      <div role="navigation" aria-label="Main Navigation" className="p-4 bg-white flex flex-col justify-center items-center">
+        <span role="heading" className="font-bold text-green-dark"> This is a Heading with ARIA</span>
         <ul className="flex wrap-6 justify-center items-center p-6 g-4 space-x-4">
           <li>
             <a href="#section1" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 outline outline-black p-2">
