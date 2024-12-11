@@ -6,7 +6,7 @@ const InteractiveLandmarks: React.FC = () => {
       <div role="banner" aria-label="Main Header" className="p-4 bg-green-500 text-white">
         <h1>Accessible Landmark Regions</h1>
         {/* Unfocused element: This button will not receive focus */}
-        <button className="mt-2 bg-white text-green-900 p-3" tabIndex={-1}>
+        <button className="mt-2 bg-white text-green-900 p-3" tabIndex={-1} aria-label="Amigo">
           Header Button
         </button>
       </div>
