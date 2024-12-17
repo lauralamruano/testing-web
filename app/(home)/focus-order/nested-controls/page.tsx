@@ -1,15 +1,46 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const NestedFocusExample: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsModalOpen(true);
   }, []);
 
+  useEffect(() => {
+    if (isModalOpen && modalRef.current) {
+      modalRef.current.focus();
+    }
+  }, [isModalOpen]);
+
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const trapFocus = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const focusableElements = modalRef.current?.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements?.[0] as HTMLElement;
+    const lastElement = focusableElements?.[focusableElements.length - 1] as HTMLElement;
+
+    if (event.key === "Tab") {
+      if (event.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    }
   };
 
   return (
@@ -78,9 +109,12 @@ const NestedFocusExample: React.FC = () => {
 
       {isModalOpen && (
         <div
+          ref={modalRef}
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
           aria-modal="true"
           aria-labelledby="modal-title"
+          tabIndex={-1}
+          onKeyDown={trapFocus}
         >
           <div className="bg-white rounded-lg p-6 w-80">
             <h2 id="modal-title" className="text-lg font-bold">
