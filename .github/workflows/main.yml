@@ -14,10 +14,10 @@ jobs:
         with:
           script: |
             const pr = context.payload.pull_request;
-            const projectId = ${{ vars.GITHUB_PROJECT_ID }}; // ID de tu proyecto GitHub
-            const columnId = ${{ vars.GITHUB_PROJECT_COLUMN_ID }}; // ID de la columna donde quieres agregar los PRs
+            const projectId = "${{ vars.GITHUB_PROJECT_ID }}"; // ID de tu proyecto GitHub
+            const columnId = "${{ vars.GITHUB_PROJECT_COLUMN_ID }}"; // ID de la columna donde quieres agregar los PRs
 
-            const issueNumberRegex = /#(d+)/;
+            const issueNumberRegex = /#(\d+)/; // Corrección: usa \d en lugar de d
             const issueMatch = pr.body.match(issueNumberRegex);
             let issueNumber;
             if (issueMatch) {
@@ -34,14 +34,12 @@ jobs:
                     }
                   }
                 }
-                `;
-                const result = await github.graphql(query);
-                if (result && result.repository && result.repository.issue) {
-                  linkedIssueNodeId = result.repository.issue.nodeId;
-                }
+              `;
+              const result = await github.graphql(query);
+              if (result && result.repository && result.repository.issue) {
+                linkedIssueNodeId = result.repository.issue.nodeId;
+              }
             }
-
-
 
             core.setOutput('pr_node_id', pr.node_id);
             core.setOutput('linked_issue_node_id', linkedIssueNodeId);
@@ -50,16 +48,15 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-              const prNodeId = "${{ steps.get_pr_info.outputs.pr_node_id }}";
-              const linkedIssueNodeId = "${{ steps.get_pr_info.outputs.linked_issue_node_id }}";
-              const projectId = ${{ vars.GITHUB_PROJECT_ID }};
-              const columnId = ${{ vars.GITHUB_PROJECT_COLUMN_ID }};
+            const prNodeId = "${{ steps.get_pr_info.outputs.pr_node_id }}";
+            const linkedIssueNodeId = "${{ steps.get_pr_info.outputs.linked_issue_node_id }}";
+            const projectId = "${{ vars.GITHUB_PROJECT_ID }}";
+            const columnId = "${{ vars.GITHUB_PROJECT_COLUMN_ID }}";
 
-              let itemNodeId;
+            let itemNodeId;
 
-              if (linkedIssueNodeId !== "null") {
-
-                  const searchItemQuery = `
+            if (linkedIssueNodeId !== "null") {
+                const searchItemQuery = `
                     query {
                       node(id: "${linkedIssueNodeId}") {
                          ... on Issue{
@@ -71,45 +68,38 @@ jobs:
                          }
                      }
                     }
-                  `;
-
-                  const searchResult = await github.graphql(searchItemQuery);
-
-                  if (searchResult && searchResult.node && searchResult.node.projectItems && searchResult.node.projectItems.nodes.length > 0) {
-                     itemNodeId = searchResult.node.projectItems.nodes[0].id;
-                  }
-
+                `;
+              const searchResult = await github.graphql(searchItemQuery);
+              if (searchResult && searchResult.node && searchResult.node.projectItems && searchResult.node.projectItems.nodes.length > 0) {
+                 itemNodeId = searchResult.node.projectItems.nodes[0].id;
               }
+            }
 
-              if (!itemNodeId) {
 
-                  const addItemMutation = `
-                  mutation {
-                    addProjectV2ItemById(
-                      input: {
-                      projectId: "${projectId}"
-                        contentId: "${prNodeId}"
-                    }
-                    ) {
-                      item {
-                        id
+            if (!itemNodeId) {
+                const addItemMutation = `
+                    mutation {
+                      addProjectV2ItemById(
+                        input: {
+                          projectId: "${projectId}"
+                          contentId: "${prNodeId}"
+                        }
+                      ) {
+                        item {
+                          id
+                        }
                       }
                     }
-                  }
-                  `;
-
-                  const addItemResult = await github.graphql(addItemMutation);
-                  if (addItemResult && addItemResult.addProjectV2ItemById && addItemResult.addProjectV2ItemById.item) {
-                    itemNodeId = addItemResult.addProjectV2ItemById.item.id;
-                  }
-
+                `;
+                const addItemResult = await github.graphql(addItemMutation);
+                if (addItemResult && addItemResult.addProjectV2ItemById && addItemResult.addProjectV2ItemById.item) {
+                   itemNodeId = addItemResult.addProjectV2ItemById.item.id;
                 }
+            }
 
-
-
-               if(itemNodeId){
+            if(itemNodeId){
                 const moveItemMutation = `
-                  mutation {
+                    mutation {
                       updateProjectV2ItemFieldValue(
                         input: {
                           projectId: "${projectId}"
@@ -120,11 +110,11 @@ jobs:
                           }
                         }
                       ) {
-                          projectV2Item {
+                        projectV2Item {
                           id
                         }
                       }
                     }
-                  `;
-                   await github.graphql(moveItemMutation);
-               }
+                `;
+              await github.graphql(moveItemMutation);
+            }
