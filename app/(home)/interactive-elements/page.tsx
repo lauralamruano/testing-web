@@ -2,7 +2,7 @@ import PatternCard from "@/components/card/card-pattern";
 
 const InteractiveElements: React.FC = () => {
   return (
-    // Esto es la 4ta prueba
+    // Esto es la 5ta prueba
     <main className="flex min-h-screen items-center justify-center flex-col">
       <h1 className="text-4xl font-bold mt-4 text-green-dark">
         2.1.1 Keyboard
