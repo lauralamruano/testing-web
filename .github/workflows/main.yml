@@ -1,99 +1,79 @@
-name: Project Workflow Automation
+name: Project Automation
 
 on:
-  pull_request:
-    types: 
-      - opened
-      - closed
   create:
     branches:
       - '*'
-
-permissions:
-  contents: read
-  actions: write
-  projects: write
+  push:
+    branches:
+      - '*'
+  pull_request:
+    types:
+      - opened
 
 jobs:
-  manage-project-tracking:
+  create_todo:
     runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch'
     steps:
-      - name: Debug Event Information
-        run: |
-          echo "Event Name: ${{ github.event_name }}"
-          echo "Branch/PR Details: ${{ toJson(github.event) }}"
-
-      - name: Process Branch Creation
-        if: github.event_name == 'create' && github.event.ref_type == 'branch'
-        uses: actions/github-script@v7
+      - name: Add item to To Do
+        uses: octokit/graphql-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            try {
-              const branchName = context.payload.ref;
-              const projects = await github.rest.projects.listForOrg({
-                org: context.repo.owner
-              });
-              
-              const project = projects.data.find(p => p.name === 'A11Y');
-              
-              if (!project) {
-                console.log('Project A11Y not found');
-                return;
+          query: |
+            mutation {
+              addProjectV2ItemById(input: {
+                projectId: "PVT_kwHOBx68XM4Awl1F",
+                contentId: "R_kgDOMl60tQ",
+                fieldValues: [
+                  {fieldId: "f75ad846", value: "To Do"}
+                ]
+              }) {
+                item {
+                  id
+                }
               }
-              
-              const columns = await github.rest.projects.listColumns({
-                project_id: project.id
-              });
-              
-              const inProgressColumn = columns.data.find(c => c.name.toLowerCase() === 'in progress');
-              
-              if (!inProgressColumn) {
-                console.log('In Progress column not found');
-                return;
-              }
-              
-              await github.rest.projects.createCard({
-                column_id: inProgressColumn.id,
-                note: `Rama iniciada: ${branchName} por @${context.actor}`
-              });
-            } catch (error) {
-              console.error('Error processing branch creation:', error);
             }
 
-      - name: Process PR Merging
-        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
-        uses: actions/github-script@v7
+  move_to_progress:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Move item to In Progress
+        uses: octokit/graphql-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            try {
-              const projects = await github.rest.projects.listForOrg({
-                org: context.repo.owner
-              });
-              
-              const project = projects.data.find(p => p.name === 'A11Y');
-              
-              if (!project) {
-                console.log('Project A11Y not found');
-                return;
+          query: |
+            mutation {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: "PVT_kwHOBx68XM4Awl1F",
+                itemId: "ITEM_ID",
+                fieldId: "47fc9ee4",
+                value: "In Progress"
+              }) {
+                clientMutationId
               }
-              
-              const columns = await github.rest.projects.listColumns({
-                project_id: project.id
-              });
-              
-              const doneColumn = columns.data.find(c => c.name.toLowerCase() === 'done');
-              
-              if (!doneColumn) {
-                console.log('Done column not found');
-                return;
+            }
+
+  move_to_done:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Move item to Done
+        uses: octokit/graphql-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          query: |
+            mutation {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: "PVT_kwHOBx68XM4Awl1F",
+                itemId: "ITEM_ID",
+                fieldId: "98236657",
+                value: "Done"
+              }) {
+                clientMutationId
               }
-              
-              await github.rest.projects.createCard({
-                column_id: doneColumn.id,
-                note: `PR Completado: ${context.payload.pull_request.title} por @${context.payload.pull_request.user.login}`
-              });
-            } catch (error) {
-              console.error('Error processing PR merge:', error);
             }
