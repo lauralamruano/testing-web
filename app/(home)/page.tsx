@@ -4,7 +4,7 @@ import NavBar from "@/components/navBar/navbar";
 import React from "react";
 
 const HomePage = () => {
-
+// testAutomatic1
   return (
     <div>
       <header>
