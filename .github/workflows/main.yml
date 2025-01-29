@@ -17,63 +17,47 @@ jobs:
     if: github.event.ref_type == 'branch'
     steps:
       - name: Add item to To Do
-        uses: octokit/graphql-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          query: |
-            mutation {
-              addProjectV2ItemById(input: {
-                projectId: "PVT_kwHOBx68XM4Awl1F",
-                contentId: "R_kgDOMl60tQ",
-                fieldValues: [
-                  {fieldId: "f75ad846", value: "To Do"}
-                ]
-              }) {
-                item {
-                  id
-                }
-              }
-            }
+        run: |
+          curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"query":"mutation { addProjectV2ItemById(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", contentId: \"R_kgDOMl60tQ\", fieldValues: [{fieldId: \"f75ad846\", value: \"To Do\"}] }) { item { id } } }"}' \
+          https://api.github.com/graphql
+
+  get_item_id:
+    runs-on: ubuntu-latest
+    outputs:
+      item_id: ${{ steps.find_id.outputs.item_id }}
+    steps:
+      - name: Find Item ID in GitHub Project
+        id: find_id
+        run: |
+          ITEM_ID=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"query":"query { node(id: \"PVT_kwHOBx68XM4Awl1F\") { ... on ProjectV2 { items(first: 50) { nodes { id content { ... on Issue { title } ... on PullRequest { title } } } } } } }"}' \
+          https://api.github.com/graphql | jq -r '.data.node.items.nodes[] | select(.content.title=="${{ github.ref_name }}") | .id')
+
+          echo "item_id=$ITEM_ID" >> $GITHUB_ENV
+        shell: bash
 
   move_to_progress:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    needs: get_item_id
     steps:
       - name: Move item to In Progress
-        uses: octokit/graphql-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          query: |
-            mutation {
-              updateProjectV2ItemFieldValue(input: {
-                projectId: "PVT_kwHOBx68XM4Awl1F",
-                itemId: "ITEM_ID",
-                fieldId: "47fc9ee4",
-                value: "In Progress"
-              }) {
-                clientMutationId
-              }
-            }
+        run: |
+          curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"query":"mutation { updateProjectV2ItemFieldValue(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", itemId: \"${{ env.item_id }}\", fieldId: \"47fc9ee4\", value: { singleSelectOptionId: \"In Progress\" } }) { clientMutationId } }"}' \
+          https://api.github.com/graphql
 
   move_to_done:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    needs: get_item_id
     steps:
       - name: Move item to Done
-        uses: octokit/graphql-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          query: |
-            mutation {
-              updateProjectV2ItemFieldValue(input: {
-                projectId: "PVT_kwHOBx68XM4Awl1F",
-                itemId: "ITEM_ID",
-                fieldId: "98236657",
-                value: "Done"
-              }) {
-                clientMutationId
-              }
-            }
+        run: |
+          curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"query":"mutation { updateProjectV2ItemFieldValue(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", itemId: \"${{ env.item_id }}\", fieldId: \"98236657\", value: { singleSelectOptionId: \"Done\" } }) { clientMutationId } }"}' \
+          https://api.github.com/graphql
+
