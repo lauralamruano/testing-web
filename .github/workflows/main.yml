@@ -20,21 +20,29 @@ jobs:
       - name: Create Issue in GitHub
         id: create_issue
         run: |
+          echo "Creando un Issue para la rama: ${{ github.ref_name }}"
+
           RESPONSE=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
-          -d "{\"title\":\"Task for branch ${{ github.ref_name }}\",\"body\":\"This issue was created automatically for branch ${{ github.ref_name }}.\",\"labels\":[\"automation\"]}" \
-          https://api.github.com/repos/YOUR_USER/YOUR_REPO/issues)
+          -d @- https://api.github.com/repos/YOUR_USER/YOUR_REPO/issues <<EOF
+          {
+            "title": "Task for branch ${{ github.ref_name }}",
+            "body": "This issue was created automatically for branch ${{ github.ref_name }}.",
+            "labels": ["automation"]
+          }
+          EOF
+          )
 
           echo "GitHub Issue Response: $RESPONSE"
 
-          ISSUE_ID=$(echo "$RESPONSE" | jq -r '.id')
+          ISSUE_ID=$(echo "$RESPONSE" | jq -r '.number')
 
-          if [ -z "$ISSUE_ID" ] || [ "$ISSUE_ID" == "null" ]; then
-            echo "❌ Error: No se pudo crear el issue en GitHub."
+          if [[ -z "$ISSUE_ID" || "$ISSUE_ID" == "null" ]]; then
+            echo "Error: No se pudo crear el Issue en GitHub."
             exit 1
           fi
 
-          echo "✅ Issue creado con ID: $ISSUE_ID"
+          echo "Issue creado con número: $ISSUE_ID"
           echo "issue_id=$ISSUE_ID" >> $GITHUB_ENV
 
   add_issue_to_project:
@@ -46,21 +54,27 @@ jobs:
       - name: Add Issue to GitHub Project
         id: add_to_project
         run: |
+          echo "🔹 Agregando el Issue #${{ needs.create_issue.outputs.issue_id }} al Project en 'To Do'"
+
           RESPONSE=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d "{\"query\":\"mutation { addProjectV2ItemById(input: { projectId: \\\"PVT_kwHOBx68XM4Awl1F\\\", contentId: \\\"${{ needs.create_issue.outputs.issue_id }}\\\" }) { item { id } } }\"}" \
-          https://api.github.com/graphql)
+          -d @- https://api.github.com/graphql <<EOF
+          {
+            "query": "mutation { addProjectV2ItemById(input: { projectId: \\\"PVT_kwHOBx68XM4Awl1F\\\", contentId: \\\"R_kgDOMl60tQ\\\" }) { item { id } } }"
+          }
+          EOF
+          )
 
           echo "GraphQL Response: $RESPONSE"
 
           ITEM_ID=$(echo "$RESPONSE" | jq -r '.data.addProjectV2ItemById.item.id')
 
-          if [ -z "$ITEM_ID" ] || [ "$ITEM_ID" == "null" ]; then
-            echo "❌ Error: No se pudo agregar el issue al Project."
+          if [[ -z "$ITEM_ID" || "$ITEM_ID" == "null" ]]; then
+            echo "Error: No se pudo agregar el Issue al Project."
             exit 1
           fi
 
-          echo "✅ Issue agregado al Project con ID: $ITEM_ID"
+          echo "Issue agregado al Project con ID: $ITEM_ID"
           echo "item_id=$ITEM_ID" >> $GITHUB_ENV
 
   move_to_progress:
@@ -69,11 +83,16 @@ jobs:
     steps:
       - name: Move Issue to In Progress
         run: |
-          echo "Actualizando Item ID: ${{ needs.add_issue_to_project.outputs.item_id }} a In Progress"
+          echo "Moviendo el Issue a 'In Progress'"
+
           RESPONSE=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d "{\"query\":\"mutation { updateProjectV2ItemFieldValue(input: { projectId: \\\"PVT_kwHOBx68XM4Awl1F\\\", itemId: \\\"${{ needs.add_issue_to_project.outputs.item_id }}\\\", fieldId: \\\"47fc9ee4\\\", value: { singleSelectOptionId: \\\"In Progress\\\" } }) { clientMutationId } }\"}" \
-          https://api.github.com/graphql)
+          -d @- https://api.github.com/graphql <<EOF
+          {
+            "query": "mutation { updateProjectV2ItemFieldValue(input: { projectId: \\\"PVT_kwHOBx68XM4Awl1F\\\", itemId: \\\"${{ needs.add_issue_to_project.outputs.item_id }}\\\", fieldId: \\\"47fc9ee4\\\", value: { singleSelectOptionId: \\\"In Progress\\\" } }) { clientMutationId } }"
+          }
+          EOF
+          )
 
           echo "GraphQL Response: $RESPONSE"
 
@@ -83,10 +102,16 @@ jobs:
     steps:
       - name: Move Issue to Done
         run: |
-          echo "Actualizando Item ID: ${{ needs.add_issue_to_project.outputs.item_id }} a Done"
+          echo "Moviendo el Issue a 'Done'"
+
           RESPONSE=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d "{\"query\":\"mutation { updateProjectV2ItemFieldValue(input: { projectId: \\\"PVT_kwHOBx68XM4Awl1F\\\", itemId: \\\"${{ needs.add_issue_to_project.outputs.item_id }}\\\", fieldId: \\\"98236657\\\", value: { singleSelectOptionId: \\\"Done\\\" } }) { clientMutationId } }\"}" \
-          https://api.github.com/graphql)
+          -d @- https://api.github.com/graphql <<EOF
+          {
+            "query": "mutation { updateProjectV2ItemFieldValue(input: { projectId: \\\"PVT_kwHOBx68XM4Awl1F\\\", itemId: \\\"${{ needs.add_issue_to_project.outputs.item_id }}\\\", fieldId: \\\"98236657\\\", value: { singleSelectOptionId: \\\"Done\\\" } }) { clientMutationId } }"
+          }
+          EOF
+          )
 
           echo "GraphQL Response: $RESPONSE"
+
