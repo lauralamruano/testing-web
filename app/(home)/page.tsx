@@ -4,7 +4,7 @@ import NavBar from "@/components/navBar/navbar";
 import React from "react";
 
 const HomePage = () => {
-// test04
+// test05
   return (
     <div>
       <header>
