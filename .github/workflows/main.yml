@@ -15,49 +15,56 @@ jobs:
   create_todo:
     runs-on: ubuntu-latest
     if: github.event.ref_type == 'branch'
-    steps:
-      - name: Add item to To Do
-        run: |
-          curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          -H "Content-Type: application/json" \
-          -d '{"query":"mutation { addProjectV2ItemById(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", contentId: \"R_kgDOMl60tQ\", fieldValues: [{fieldId: \"f75ad846\", value: \"To Do\"}] }) { item { id } } }"}' \
-          https://api.github.com/graphql
-
-  get_item_id:
-    runs-on: ubuntu-latest
     outputs:
-      item_id: ${{ steps.find_id.outputs.item_id }}
+      item_id: ${{ steps.create_item.outputs.item_id }}
     steps:
-      - name: Find Item ID in GitHub Project
-        id: find_id
+      - name: Create Item in To Do
+        id: create_item
         run: |
-          ITEM_ID=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          RESPONSE=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d '{"query":"query { node(id: \"PVT_kwHOBx68XM4Awl1F\") { ... on ProjectV2 { items(first: 50) { nodes { id content { ... on Issue { title } ... on PullRequest { title } } } } } } }"}' \
-          https://api.github.com/graphql | jq -r '.data.node.items.nodes[] | select(.content.title=="${{ github.ref_name }}") | .id')
+          -d '{"query":"mutation { addProjectV2ItemById(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", contentId: \"R_kgDOMl60tQ\" }) { item { id } } }"}' \
+          https://api.github.com/graphql)
 
+          echo "GraphQL Response: $RESPONSE"
+
+          ITEM_ID=$(echo "$RESPONSE" | jq -r '.data.addProjectV2ItemById.item.id')
+
+          if [ -z "$ITEM_ID" ] || [ "$ITEM_ID" == "null" ]; then
+            echo "❌ Error: No se pudo crear el ítem en To Do."
+            exit 1
+          fi
+
+          echo "✅ Item creado con ID: $ITEM_ID"
           echo "item_id=$ITEM_ID" >> $GITHUB_ENV
-        shell: bash
+          echo "::set-output name=item_id::$ITEM_ID"
 
   move_to_progress:
     runs-on: ubuntu-latest
-    needs: get_item_id
+    needs: create_todo
     steps:
       - name: Move item to In Progress
         run: |
-          curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          echo "Actualizando Item ID: ${{ needs.create_todo.outputs.item_id }} a In Progress"
+          RESPONSE=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d '{"query":"mutation { updateProjectV2ItemFieldValue(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", itemId: \"${{ env.item_id }}\", fieldId: \"47fc9ee4\", value: { singleSelectOptionId: \"In Progress\" } }) { clientMutationId } }"}' \
-          https://api.github.com/graphql
+          -d '{"query":"mutation { updateProjectV2ItemFieldValue(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", itemId: \"${{ needs.create_todo.outputs.item_id }}\", fieldId: \"47fc9ee4\", value: { singleSelectOptionId: \"In Progress\" } }) { clientMutationId } }"}' \
+          https://api.github.com/graphql)
+
+          echo "GraphQL Response: $RESPONSE"
 
   move_to_done:
     runs-on: ubuntu-latest
-    needs: get_item_id
+    needs: create_todo
     steps:
       - name: Move item to Done
         run: |
-          curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          echo "Actualizando Item ID: ${{ needs.create_todo.outputs.item_id }} a Done"
+          RESPONSE=$(curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "Content-Type: application/json" \
-          -d '{"query":"mutation { updateProjectV2ItemFieldValue(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", itemId: \"${{ env.item_id }}\", fieldId: \"98236657\", value: { singleSelectOptionId: \"Done\" } }) { clientMutationId } }"}' \
-          https://api.github.com/graphql
+          -d '{"query":"mutation { updateProjectV2ItemFieldValue(input: { projectId: \"PVT_kwHOBx68XM4Awl1F\", itemId: \"${{ needs.create_todo.outputs.item_id }}\", fieldId: \"98236657\", value: { singleSelectOptionId: \"Done\" } }) { clientMutationId } }"}' \
+          https://api.github.com/graphql)
+
+          echo "GraphQL Response: $RESPONSE"
+
 
