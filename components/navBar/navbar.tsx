@@ -17,6 +17,7 @@ const NavBar: React.FC = () => {
       </div>
       <div className="navbar-end">
         <a className="btn" href="#">Button</a>
+        <button className="p-4" aria-disabled="true">Disabled</button>
       </div>
     </div>
   );
