@@ -26,9 +26,22 @@ const IlogicalOrder: React.FC = () => {
 
   return (
     <div className="p-4" onKeyDown={handleContainerKeyDown}>
-      <button className='bg-blue-500 p-2 text-white m-2' tabIndex={-1}>Hola</button>
-      <button className='bg-blue-500 p-2 text-white m-2' tabIndex={-1}>ola</button>
-      <button className='bg-blue-500 p-2 text-white m-2' tabIndex={-1}>la</button>
+      <h1 className="text-xl mb-4">
+      Region
+      </h1>
+      <div className="flex flex-col space-y-2">
+        {['Hola 1', 'ola 2', 'la 3'].map((label, index) => (
+          <button
+            key={label}
+            ref={(el) => {
+              buttonRefs.current[index] = el;
+            }}
+            className="p-2 bg-blue-500 text-white"
+          >
+            {label}
+          </button>
+        ))}
+      </div>
       <h1 className="text-xl mb-4">
       Foco modificado por evento
       </h1>
