@@ -26,8 +26,11 @@ const IlogicalOrder: React.FC = () => {
 
   return (
     <div className="p-4" onKeyDown={handleContainerKeyDown}>
+      <button className='bg-blue-500 p-2 text-white m-2' tabIndex={-1}>Hola</button>
+      <button className='bg-blue-500 p-2 text-white m-2' tabIndex={-1}>ola</button>
+      <button className='bg-blue-500 p-2 text-white m-2' tabIndex={-1}>la</button>
       <h1 className="text-xl mb-4">
-        Ejemplo de error de accesibilidad: Foco modificado por evento
+      Foco modificado por evento
       </h1>
       <div className="flex flex-col space-y-2">
         {['Botón 1', 'Botón 2', 'Botón 3'].map((label, index) => (
@@ -43,7 +46,7 @@ const IlogicalOrder: React.FC = () => {
         ))}
       </div>
       <p className="mt-4 text-sm">
-        Nota: Aunque en el DOM el orden es Botón 1, Botón 2, Botón 3, al presionar Tab el foco
+        Note: Aunque en el DOM el orden es Botón 1, Botón 2, Botón 3, al presionar Tab el foco
         se mueve en el orden: Botón 1 → Botón 3 → Botón 2.
       </p>
     </div>
