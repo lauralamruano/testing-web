@@ -19,7 +19,7 @@ const FocusOrderPage: React.FC = () => {
             using the keyboard.
           </p>
         </section>
-        <section className="flex items-center justify-center gap-4 bg-green-dark w-full p-4">
+        <section className="flex flex-wrap items-center justify-center gap-4 bg-green-dark w-full p-4">
           <PatternCard
             title={"Hidden CSS elements"}
             description={"These examples  have controls are hidden with CSS"}
