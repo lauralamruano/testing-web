@@ -46,6 +46,10 @@ const FocusOrderPage: React.FC = () => {
             description={"These examples  have controls are Nested Focus"}
             link={"/focus-order/focus-multiple"}
             imageSrc={""}></PatternCard>
+            <PatternCard title={"Tabindex Negative"}
+            description={"These examples  have controls are Nested Focus"}
+            link={"/focus-order/tabindex"}
+            imageSrc={""}></PatternCard>
         </section>
       </main>
     </div>
