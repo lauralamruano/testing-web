@@ -3,9 +3,9 @@ import React from "react";
 const TabIndexPositive = () => {
   return (
     <div className="p-4">
-        <button>Button 1</button>
-        <button>Button 2</button>
-        <button>Button 3</button>
+        <button className="bg-blue-500 text-white p-2 m-1">Button 1</button>
+        <button className="bg-blue-500 text-white p-2 m-1">Button 2</button>
+        <button className="bg-blue-500 text-white p-2 m-1">Button 3</button>
       {/* Error: tabindex positivo en un elemento interactivo */}
       <button className="bg-blue-500 text-white p-2" tabIndex={5}>
         Botón con tabindex positivo
