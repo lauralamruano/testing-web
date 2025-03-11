@@ -15,6 +15,10 @@ const Tabindex: React.FC = () => {
             description={"These examples  have controls are Nested Focus"}
             link={"/focus-order/tabindex/tabindex-neutro"}
             imageSrc={""}></PatternCard>
+      <PatternCard title={"Tabindex Positive"}
+            description={"These examples  have controls are Nested Focus"}
+            link={"/focus-order/tabindex/tabindex-positive"}
+            imageSrc={""}></PatternCard>
       </section>
     </div>
   );
