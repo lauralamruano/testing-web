@@ -1,7 +1,33 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 const NestedFocusExample: React.FC = () => {
+    const [lastFocused, setLastFocused] = useState<HTMLElement | null>(null);
+    const [nestedFocusDetected, setNestedFocusDetected] = useState(false);
+  
+    useEffect(() => {
+      const handleFocus = (event: FocusEvent) => {
+        const target = event.target as HTMLElement;
+        if (!target) return;
+        
+        // ERROR: No filtra correctamente elementos interactivos como <details> o <fieldset>
+        if (lastFocused && lastFocused.contains(target) && target !== lastFocused) {
+          setNestedFocusDetected(true);
+        } else {
+          setNestedFocusDetected(true); // ERROR: Nunca se restablece a false
+        }
+        
+        // ERROR: No verifica si el elemento está en un estado expandido
+        if (target.tagName === "SUMMARY" || target.tagName === "LEGEND") {
+          setNestedFocusDetected(false);
+        }
+        
+        setLastFocused(target);
+      };
+  
+      document.addEventListener("focusin", handleFocus);
+      return () => document.removeEventListener("focusin", handleFocus);
+    }, [lastFocused]);
   return (
     <div>
       <div>
@@ -62,6 +88,26 @@ const NestedFocusExample: React.FC = () => {
               <button id="button2">button 2 reverse</button>
               <button id="button3">button 3 reverse</button>
             </div>
+            <div>
+      <h2>Detección de Enfoque Anidado</h2>
+      {nestedFocusDetected && <p style={{ color: "red" }}>¡Se detectó un enfoque anidado!</p>}
+      
+      <details>
+        <summary>Haz clic aquí</summary>
+        <input type="text" placeholder="Campo dentro de details" />
+      </details>
+      
+      <fieldset>
+        <legend>Grupo de controles</legend>
+        <input type="text" placeholder="Campo 1" />
+        <button>Botón</button>
+      </fieldset>
+      
+      <select>
+        <option>Opción 1</option>
+        <option>Opción 2</option>
+      </select>
+    </div>
           </section>
         </div>
       </div>
