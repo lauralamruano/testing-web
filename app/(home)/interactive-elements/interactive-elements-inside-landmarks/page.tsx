@@ -1,6 +1,32 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 
 const InteractiveLandmarks: React.FC = () => {
+  const [nonOperable, setNonOperable] = useState<string[]>([]);
+
+  useEffect(() => {
+    const checkKeyboardOperability = (event: KeyboardEvent) => {
+      const activeElement = document.activeElement as HTMLElement;
+      if (!activeElement) return;
+
+      // ERROR: Detectar elementos que reciben foco pero no responden a Enter o Space
+      if (
+        ((activeElement.tagName === "DIV" || activeElement.tagName === "SPAN" || activeElement.tagName === "BUTTON") &&
+        activeElement.getAttribute("tabindex") !== null) ||
+        (activeElement.tagName === "BUTTON" && !activeElement.hasAttribute("onclick") && !activeElement.hasAttribute("type")) // Botón sin acción
+      ) {
+        setNonOperable((prev) => {
+          if (!prev.includes(activeElement.tagName)) {
+            return [...prev, activeElement.tagName];
+          }
+          return prev;
+        });
+      }
+    };
+
+    document.addEventListener("keydown", checkKeyboardOperability);
+    return () => document.removeEventListener("keydown", checkKeyboardOperability);
+  }, []);
   return (
     <div className="w-full min-h-screen flex justify-center flex-col">
       <div role="banner" aria-label="Main Header" className="p-4 bg-green-500 text-white">
@@ -98,6 +124,46 @@ const InteractiveLandmarks: React.FC = () => {
           Contact Us
         </a>
       </div>
+      <div className="p-4 border border-gray-300 rounded-lg shadow-md">
+      <h2 className="text-lg font-bold mb-2">Detección de Controles No Operables por Teclado</h2>
+      {nonOperable.length > 0 && (
+        <p className="text-red-500 font-semibold">Elementos no operables detectados: {nonOperable.join(", ")}</p>
+      )}
+      
+      <div className="flex flex-col gap-2">
+        <button className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+          Botón Operable
+        </button>
+        
+        <button
+          tabIndex={0} // ERROR: Botón sin acción asociada
+          className="p-2 bg-red-500 text-white rounded-md"
+        >
+          Botón No Operable
+        </button>
+        
+        <div
+          tabIndex={0} // ERROR: Este elemento puede recibir foco pero no responde a Enter o Space
+          className="p-2 bg-gray-300 rounded-md"
+        >
+          DIV No Operable
+        </div>
+        
+        <span
+          tabIndex={0} // ERROR: Este elemento también recibe foco pero no es activable
+          className="p-2 bg-gray-400 rounded-md"
+        >
+          SPAN No Operable
+        </span>
+        
+        <a
+          href="#"
+          className="p-2 text-blue-500 underline hover:text-blue-700"
+        >
+          Enlace Operable
+        </a>
+      </div>
+    </div>
     </div>
   );
 };
