@@ -23,6 +23,7 @@ const TabIndexNeutro = () => {
         <button className="px-4 py-2 bg-green-500 text-white rounded">Botón dentro de un div con tabindex</button>
         <a href="#" className="text-blue-500 underline ml-4">Enlace dentro de un div con tabindex</a>
       </div>
+      <button className="p-2 m-2 bg-blue-200"><span tabIndex={0}>Soy un span dentro de un button</span></button>
     </div>
   );
 };
