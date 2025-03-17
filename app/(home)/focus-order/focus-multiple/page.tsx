@@ -103,6 +103,9 @@ const MultipleFocusDetection: React.FC = () => {
             <span>View</span>
           </button>
         </a>
+        <button className="p-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+          Otro botón 1
+        </button>
         <button
           id="focusButton"
           ref={focusButtonRef}
@@ -111,7 +114,7 @@ const MultipleFocusDetection: React.FC = () => {
           Haz clic aquí
         </button>
         <button className="p-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-          Otro botón
+          Otro botón 2
         </button>
       </div>
     </div>
