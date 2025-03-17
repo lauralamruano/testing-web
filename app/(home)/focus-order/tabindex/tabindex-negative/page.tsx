@@ -17,6 +17,7 @@ const TabindexNegative: React.FC = () => {
       <button  className="mt-2 p-2 bg-red-500 text-white rounded m-2">Botón 1</button>
       <button  className="mt-2 p-2 bg-red-500 text-white rounded m-2">Botón 2</button>
       <button  className="mt-2 p-2 bg-red-500 text-white rounded m-2">Botón 3</button>
+      <div tabIndex={-1} className="mt-2 p-2 bg-red-500 text-white rounded m-2">Div con tabindex negative</div>
 
     </div>
   );
