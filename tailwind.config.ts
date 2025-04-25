@@ -9,13 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // redefining your “green-gradient” token as pure white:
         "green-dark": "#37523e",
+        "green-gradient": "#ffffff",
       },
       backgroundImage: {
-        "green-gradient": "linear-gradient(to bottom, #bbf7d0, #3f593f)",
+        // remove or leave only real gradients here
+        // e.g. "green-gradient": "linear-gradient(to right, #37523e 0%, #78e08f 100%)"
       },
     },
   },
   plugins: [require("daisyui")],
 };
+
 export default config;

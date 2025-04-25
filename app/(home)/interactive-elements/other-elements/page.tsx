@@ -55,7 +55,7 @@ const OtherInteractiveElements: React.FC = () => {
           ref={(el) => {
             buttonRefs.current[index] = el;
           }}
-          className="px-4 py-2 bg-green-700 text-white rounded"
+          className="px-4 py-2 bg-green-700 text-red-500 rounded"
           onClick={() => handleClick(label)}
           aria-label={`Interactive ${label}`}
         >
