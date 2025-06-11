@@ -44,6 +44,14 @@ const AtypicalExamples: React.FC = () => {
           <li>
             <PatternCard title={"Size Table"} description={"This example will show a table with sorting and resizing of columns using Keyboard."} link={"/atypical-examples/size-table"} imageSrc={"/images/order-table.png"}/>
           </li>
+          <li>
+            <PatternCard
+              title="Email Template"
+              description="This example is a  file export component allows users to export files using keyboard navigation."
+              imageSrc="/images/update-images.png"
+              link= {"/atypical-examples/email"}
+            />
+          </li>
         </ul>
       </section>
       <section className="flex flex-col items-center justify-center pb-4 w-full">
