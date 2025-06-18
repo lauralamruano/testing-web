@@ -9,7 +9,9 @@ const KeyboardOperable = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center space-y-6 p-6">
       <h1 className="text-3xl font-bold mb-6">Controles con foco pero no activables por teclado</h1>
-
+        <a href="#link1" className="text-green-700 underline">
+          Link 1
+        </a>
       {/* Control 1 */}
       <div
         tabIndex={0}
@@ -40,6 +42,9 @@ const KeyboardOperable = () => {
       <p className="text-gray-600 text-sm mt-6 max-w-md text-center">
         Todos estos elementos se pueden enfocar con la tecla <kbd>Tab</kbd>, pero no se activan con <kbd>Enter</kbd> o <kbd>Space</kbd>. Solo se activan con el mouse, lo cual representa una barrera de accesibilidad.
       </p>
+      <a href="#link2" className="text-green-700 underline">
+          Link 2
+        </a>
     </div>
   );
 };
