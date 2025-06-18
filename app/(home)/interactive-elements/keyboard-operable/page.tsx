@@ -76,7 +76,10 @@ const KeyboardOperable: React.FC = () => {
       >
         Pseudo-botón 3
       </button>
-
+      <button
+       type="button"
+       className="border border-red-500 rounded px-4 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400">
+      Button 4</button>
       <p className="text-gray-600 text-sm mt-6 max-w-md text-center">
         Todos estos elementos se pueden enfocar con <kbd>Tab</kbd>. El
         <strong> Pseudo-botón 1</strong> responde tanto a clic como a teclado
