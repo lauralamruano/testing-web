@@ -78,7 +78,8 @@ const KeyboardOperable: React.FC = () => {
       </button>
       <button
        type="button"
-       className="border border-red-500 rounded px-4 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400">
+       className="border border-red-500 rounded px-4 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400"
+       aria-disabled="true">
       Button 4</button>
       <p className="text-gray-600 text-sm mt-6 max-w-md text-center">
         Todos estos elementos se pueden enfocar con <kbd>Tab</kbd>. El
