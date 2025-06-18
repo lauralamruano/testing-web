@@ -4,7 +4,14 @@ import React, { useState } from "react";
 const KeyboardOperable: React.FC = () => {
   const [message2Visible, setMessage2Visible] = useState(false);
 
-  // Manejador genérico para mostrar alerta al hacer clic
+  // Evita la activación por teclado (Enter/Space)
+  const blockKeyboardActivation = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+    }
+  };
+
+  // Muestra alerta solo al hacer clic
   const handleClick = (label: string) => {
     alert(`Activated ${label} by mouse click`);
   };
@@ -14,16 +21,9 @@ const KeyboardOperable: React.FC = () => {
     console.log("Botón 1 activado");
   };
 
-  // Acción original de Pseudo-botón 2: alternar un mensaje en la página
+  // Acción original de Pseudo-botón 2: alternar un mensaje
   const handleAction2 = () => {
     setMessage2Visible((prev) => !prev);
-  };
-
-  // Bloquear Enter/Space para Pseudo-botón 2
-  const blockKeyboardActivation = (e: React.KeyboardEvent<HTMLSpanElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-    }
   };
 
   return (
@@ -36,27 +36,28 @@ const KeyboardOperable: React.FC = () => {
         Link 1
       </a>
 
-      {/* Pseudo-botón 1: conserva alerta y log */}
-      <div
-        tabIndex={0}
+      {/* Pseudo-botón 1 */}
+      <button
+        type="button"
         onClick={() => {
           handleAction1();
           handleClick("Botón 1");
         }}
+        onKeyDown={blockKeyboardActivation}
         className="border border-blue-500 rounded px-4 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
       >
         Pseudo-botón 1
-      </div>
+      </button>
 
-      {/* Pseudo-botón 2: toggle de mensaje, focusable, pero bloquea teclado */}
-      <span
-        tabIndex={0}
+      {/* Pseudo-botón 2 */}
+      <button
+        type="button"
         onClick={handleAction2}
         onKeyDown={blockKeyboardActivation}
         className="border border-green-500 rounded px-4 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-400"
       >
         Pseudo-botón 2
-      </span>
+      </button>
 
       {/* Mensaje toggled por Pseudo-botón 2 */}
       {message2Visible && (
@@ -65,19 +66,20 @@ const KeyboardOperable: React.FC = () => {
         </div>
       )}
 
-      {/* Pseudo-botón 3 (sin cambios) */}
-      <div
-        tabIndex={0}
+      {/* Pseudo-botón 3 */}
+      <button
+        type="button"
         onClick={() => handleClick("Botón 3")}
+        onKeyDown={blockKeyboardActivation}
         className="border border-red-500 rounded px-4 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400"
       >
         Pseudo-botón 3
-      </div>
+      </button>
 
       <p className="text-gray-600 text-sm mt-6 max-w-md text-center">
         Todos estos elementos se pueden enfocar con <kbd>Tab</kbd>, pero solo se
         activan con el mouse. <kbd>Enter</kbd> y <kbd>Space</kbd> están bloqueados
-        en Pseudo-botón 2.
+        en los pseudo-botones.
       </p>
 
       <a href="#link2" className="text-green-700 underline">
@@ -88,3 +90,4 @@ const KeyboardOperable: React.FC = () => {
 };
 
 export default KeyboardOperable;
+
