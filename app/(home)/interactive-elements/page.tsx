@@ -49,6 +49,12 @@ const InteractiveElements: React.FC = () => {
           link={"/interactive-elements/keyboard-operable"}
           imageSrc={"/images/interactive-with-landmark.png"}
         />
+        <PatternCard
+          title={"Keyboard Operable Aria"}
+          description={"Interactive elements within landmarks powered by ARIA"}
+          link={"/interactive-elements/keyboard-operable-aria"}
+          imageSrc={"/images/interactive-with-landmark.png"}
+        />
       </section>
     </main>
   );
