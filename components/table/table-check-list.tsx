@@ -63,6 +63,11 @@ const CheckListTable = () => {
                   <Link href={"/focus-order"}>2.4.3 Focus Order {" "}</Link>
                   
                 </li>
+                <li className="text-white text-decoration underline cursor-pointer">
+                {" "}
+                  <Link href={"/color-contrast"}>1.4.3 Color Contrast {" "}</Link>
+                  
+                </li>
               </ul>
             </td>
           </tr>
