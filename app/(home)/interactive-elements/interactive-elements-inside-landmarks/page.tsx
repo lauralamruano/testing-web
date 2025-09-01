@@ -35,6 +35,7 @@ const InteractiveLandmarks: React.FC = () => {
         <button className="mt-2 bg-white text-green-900 p-3" tabIndex={-1} aria-label="Amigo">
           Header Button
         </button>
+        <button role="link">Double role</button>
       </div>
 
       <div role="navigation" aria-label="Main Navigation" className="p-4 bg-white flex flex-col justify-center items-center">
