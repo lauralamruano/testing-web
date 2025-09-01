@@ -115,39 +115,6 @@ const CustomCombobox: React.FC = () => {
   );
 };
 
-// Custom textarea using contentEditable (focusable pero bloquea typing)
-// const CustomTextarea: React.FC = () => {
-//   const [text, setText] = useState('');
-//   return (
-//     <div
-//       role="textbox"
-//       tabIndex={0}
-//       contentEditable
-//       className="w-full h-24 p-2 border"
-//       onKeyDown={(e) => e.preventDefault()} // bloquea edición con teclado
-//       onInput={(e) => setText((e.target as HTMLElement).innerText)}
-//     >
-//       {text}
-//     </div>
-//   );
-// };
-
-// Custom text input using contentEditable (focusable pero bloquea typing)
-// const CustomTextInput: React.FC = () => {
-//   const [text, setText] = useState('');
-//   return (
-//     <div
-//       role="textbox"
-//       tabIndex={0}
-//       contentEditable
-//       className="w-full p-2 border"
-//       onKeyDown={(e) => e.preventDefault()} // bloquea edición con teclado
-//       onInput={(e) => setText((e.target as HTMLElement).innerText)}
-//     >
-//       {text || 'Custom Text Input (mouse-only)'}
-//     </div>
-//   );
-// };
 
 // Custom spinbutton (focusable; sin manejo de flechas)
 const CustomSpinbutton: React.FC = () => {
@@ -292,16 +259,15 @@ const Home: NextPage = () => (
 
     <CustomButton />
     <CustomLink />
+    <CustomFileInput />
+    <CustomColorInput />
     <CustomCheckbox />
     <CustomRadioGroup />
     <CustomCombobox />
-    {/* <CustomTextarea /> */}
-    {/* <CustomTextInput /> */}
     <CustomSpinbutton />
     <CustomSlider />
     <CustomDetails />
-    <CustomFileInput />
-    <CustomColorInput />
+   
 
     <div id="section" className="mt-8 text-lg font-semibold">Target Section</div>
   </div>
