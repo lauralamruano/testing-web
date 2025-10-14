@@ -1,4 +1,5 @@
 // app/resize-text-mock/page.tsx
+// app/resize-text-mock/page.tsx
 "use client";
 import React from "react";
 
@@ -52,21 +53,42 @@ function ZoomIndicator(): JSX.Element {
 }
 
 export default function ResizeTextMock(): JSX.Element {
+  // Keep text visually fixed across page zoom by updating CSS vars with the inverse zoom.
+  React.useEffect(() => {
+    const apply = () => {
+      const vv = (typeof window !== "undefined" && (window as any).visualViewport) || null;
+      const scale = vv?.scale || (typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1);
+      const inv = scale ? 1 / scale : 1;
+      document.documentElement.style.setProperty("--vv", String(scale));
+      document.documentElement.style.setProperty("--inv", String(inv));
+    };
+    apply();
+    const vv = (typeof window !== "undefined" && (window as any).visualViewport) || null;
+    vv?.addEventListener("resize", apply);
+    vv?.addEventListener("scroll", apply);
+    window.addEventListener("resize", apply);
+    return () => {
+      vv?.removeEventListener("resize", apply);
+      vv?.removeEventListener("scroll", apply);
+      window.removeEventListener("resize", apply);
+    };
+  }, []);
   return (
     <main className="min-h-screen bg-white text-gray-900">
       <style jsx global>{`
-        /* Intentional anti-patterns for the mock */
+        /* Dynamic counter-zoom using VisualViewport scale */
+        :root { --vv: 1; --inv: 1; }
+
         .counterzoom {
-          /* Counteract browser zoom by always scaling down to ~50% */
-          transform: scale(0.5);
+          /* Counteract browser zoom with the inverse scale */
+          transform: scale(var(--inv));
           transform-origin: top left;
-          /* Expand width so content still fits after transform */
-          width: 200%;
+          /* Grow the box so its layout footprint remains comparable */
+          width: calc(100% * var(--vv));
         }
-        .chromezoom {
-          /* Non-standard: works in Chromium, ignored elsewhere */
-          zoom: 0.5;
-        }
+
+        /* Non-standard (Chromium) zoom technique kept for reference */
+        .chromezoom { zoom: 0.5; }
       `}</style>
 
       <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur">
