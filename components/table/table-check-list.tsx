@@ -68,6 +68,10 @@ const CheckListTable = () => {
                   <Link href={"/color-contrast"}>1.4.3 Color Contrast {" "}</Link>
                   
                 </li>
+                <li className="text-white text-decoration underline cursor-pointer">
+                  {" "}
+                  <Link href="/zoom/rezise-text">1.4.4 Rezise Text </Link>
+                </li>
               </ul>
             </td>
           </tr>
