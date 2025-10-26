@@ -38,6 +38,14 @@ const FocusPage: React.FC = () => {
           link={"/focus-trap/form-trap"}
           imageSrc={"/images/formtrap.png"}
         />
+         <PatternCard
+          title={"Loop Trap"}
+          description={
+            "This example demonstrates how to implement keyboard traps on a page"
+          }
+          link={"/focus-trap/loop"}
+          imageSrc={"/images/formtrap.png"}
+        />
       </section>
     </div>
   );
