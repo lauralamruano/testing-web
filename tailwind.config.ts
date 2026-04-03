@@ -9,17 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // redefining your “green-gradient” token as pure white:
-        "green-dark": "#37523e",
-        "green-gradient": "#ffffff",
+        "green-dark": "#166534",
+        "green-gradient": "#f9fafb",
+        "a11y-pass": "#16a34a",
+        "a11y-fail": "#dc2626",
+        "a11y-warn": "#d97706",
       },
-      backgroundImage: {
-        // remove or leave only real gradients here
-        // e.g. "green-gradient": "linear-gradient(to right, #37523e 0%, #78e08f 100%)"
+      fontFamily: {
+        sans: ["Inter", "system-ui", "sans-serif"],
       },
     },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light"],
+  },
 };
 
 export default config;
